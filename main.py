@@ -58,3 +58,9 @@ def create_todo(todo: Todo):
         "description":todo.description
     }
 
+@app.delete("/todos")
+def delete_todo_by_title(title:str):
+    result = collection.delete_one({"title":title})
+    if result.deleted_count == 0:
+        return {"Message": "Todo not found"}
+    return {"Message": "Todo deleted successfully"}
