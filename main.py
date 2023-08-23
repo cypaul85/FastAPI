@@ -48,3 +48,13 @@ def read_todo_by_title(title: str):
     if not todo:
         return {"Message": "Todo not found"}
     return {"data": todo}
+
+@app.post("todos")
+def create_todo(todo: Todo):
+    result = collection.insert_one(todo.dict())
+    return{
+        "id":str(result.inserted_id),
+        "title":todo.title,
+        "description":todo.description
+    }
+
