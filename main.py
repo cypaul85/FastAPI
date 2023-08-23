@@ -37,7 +37,7 @@ collection = db[mongo_collection]
 def home():
     return {"Message":"Hello World!"}
 
-@app.get("todos")
+@app.get("/todos")
 def read_todos():
     todos = list(collection.find({}, {"_id": 0}))
     return {"data": todos}
