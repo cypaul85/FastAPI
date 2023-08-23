@@ -41,3 +41,10 @@ def home():
 def read_todos():
     todos = list(collection.find({}, {"_id": 0}))
     return {"data": todos}
+
+@app.get("/todos/{title}")
+def read_todo_by_title(title: str):
+    todo = collection.find_one({"title": title}, {"_id":0})
+    if not todo:
+        return {"Message": "Todo not found"}
+    return {"data": todo}
